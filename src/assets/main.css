@@ -2,7 +2,7 @@
 
 #app {
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 auto;
   font-weight: normal;
   width: 100vw;
 }
@@ -29,6 +29,23 @@ a,
 
   #app {
     display: grid;
-    padding: 0 2rem;
   }
+}
+
+:root {
+  --actual-color: #4299e1;
+  --board-bg: #f4f5f7;
+  --border-color: #dfe1e6;
+  --card-bg: #ffffff;
+  --column-bg: #ebecf0;
+  --completed-color: #4299e1;
+  --focus-color: #4299e1;
+  --ideal-color: #a0aec0;
+  --light-grid: #e2e8f0;
+  --pending-color: #f56565;
+  --text-color: #2d3748;
+  --color-todo: #f56565;
+  --color-progress: #4299e1;
+  --color-testing: #ecc94b;
+  --color-done: #40bb78;
 }

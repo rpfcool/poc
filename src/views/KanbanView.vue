@@ -32,7 +32,9 @@
       :aria-labelledby="`title-${column.id}`"
     >
       <h2 :id="`title-${column.id}`" class="column-title">
-        {{ column.title }} <span class="task-count">({{ column.tasks.length }})</span>
+        {{ column.title }} <span class="task-count">
+          ({{ column.tasks.length }})
+        </span>
       </h2>
 
       <ul 
@@ -127,10 +129,13 @@ const liveMessage = ref('');
 const draggedTaskId = ref(null);
 const dragOverColumnId = ref(null);
 
-// --- Funções de Acessibilidade e Estado ---
+// No script: A função que alimenta a região "viva"
 function announce(message) {
-  liveMessage.value = '';
-  nextTick(() => { liveMessage.value = message; });
+  liveMessage.value = ''; // Limpa a mensagem anterior
+  // nextTick garante que a mudança seja detectada pelo leitor de tela
+  nextTick(() => { 
+    liveMessage.value = message; 
+  });
 }
 
 function toggleSelection(task) {
@@ -165,12 +170,14 @@ function moveTaskWithinColumn(taskId, columnId, currentIndex, direction) {
   announce(`'${task.title}' movido para a posição ${newIndex + 1}.`);
 }
 
-// --- Handlers de Eventos de Teclado ---
+// Função que gerencia a movimentação (teclado)
 async function handleCardMovement(event, task, columnId, colIndex, taskIndex) {
+  // Garante que o cartão está no "modo de movimento"
   if (!selectedCard.value || selectedCard.value.id !== task.id) {
     return;
   }
   
+  // Função interna para gerenciar o foco após a renderização
   const moveAndFocus = async () => {
     await nextTick();
     const el = document.querySelector(`[data-card-id="${task.id}"]`);
@@ -181,6 +188,7 @@ async function handleCardMovement(event, task, columnId, colIndex, taskIndex) {
     case 'ArrowRight':
       event.preventDefault();
       if (colIndex < columns.length - 1) {
+        // moveTask (lógica de negócio)
         moveTask(task.id, columnId, columns[colIndex + 1].id);
         moveAndFocus();
       }
@@ -256,14 +264,6 @@ function cleanupDragState() {
 </script>
 
 <style>
-:root {
-  --board-bg: #f4f5f7;
-  --column-bg: #ebecf0;
-  --card-bg: #ffffff;
-  --text-color: #172b4d;
-  --focus-color: #0079bf;
-  --border-color: #dfe1e6;
-}
 body {
   background-color: var(--board-bg);
   color: var(--text-color);
