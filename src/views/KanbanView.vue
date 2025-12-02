@@ -1,10 +1,10 @@
 <template>
-  <div
-    class="kanban-board"
-    role="application" 
-    aria-label="Quadro Kanban de tarefas"
-    aria-describedby="board-instructions"
-  >
+    <div
+      class="kanban-board"
+      role="application" 
+      aria-label="Quadro Kanban de tarefas"
+      aria-describedby="board-instructions"
+    >
     <div id="board-instructions" class="sr-only">
       <h2>Instruções do Quadro Kanban:</h2>
       <ul>
@@ -78,7 +78,12 @@
         </li>
       </ul>
     </section>
-  </div>
+    </div>
+    <div class="navigation-footer">
+      <router-link to="/" class="back-home-btn">
+        <i class="pi pi-home"></i> Voltar para Página Inicial
+      </router-link>
+    </div>
 </template>
 
 <script setup>
@@ -368,5 +373,32 @@ body {
 .column-content.drag-over {
   background-color: #d4e6f1;
   border: 2px dashed var(--focus-color);
+}
+.navigation-footer {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+
+.back-home-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--surface-card);
+  color: var(--text-color);
+  border: 1px solid var(--surface-border);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.back-home-btn:hover {
+  background-color: var(--primary-color);
+  color: var(--primary-color-text);
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
 }
 </style>

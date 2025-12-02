@@ -87,6 +87,11 @@
       </div>
     </div>
   </div>
+      <div class="navigation-footer">
+      <router-link to="/" class="back-home-btn">
+        <i class="pi pi-home"></i> Voltar para Página Inicial
+      </router-link>
+    </div>
 </template>
 
 <script setup>
@@ -281,5 +286,32 @@ const actualWorkPath = computed(() => {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+.navigation-footer {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+
+.back-home-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--surface-card);
+  color: var(--text-color);
+  border: 1px solid var(--surface-border);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.back-home-btn:hover {
+  background-color: var(--primary-color);
+  color: var(--primary-color-text);
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
 }
 </style>

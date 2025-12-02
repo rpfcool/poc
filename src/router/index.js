@@ -8,6 +8,12 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'home',
+      component: () => import('../views/HomeView.vue'),
+      meta: { title: 'Home' }
+    },
+    {
+      path: '/kanban',
       name: 'kanban',
       component: KanbanView,
       meta: { title: 'Kanban' }

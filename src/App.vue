@@ -3,7 +3,7 @@ import AppMenu from './components/AppMenu.vue';
 </script>
 
 <template>
-    <AppMenu />
+    <!--<AppMenu />-->
     <router-view />
 </template>
 

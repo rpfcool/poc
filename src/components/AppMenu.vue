@@ -3,7 +3,10 @@
     <nav class="main-navigation" aria-label="Navegação principal">
       <ul>
         <li>
-          <router-link to="/">Kanban</router-link>
+          <router-link to="/">Home</router-link>
+        </li>
+        <li>
+          <router-link to="/kanban">Kanban</router-link>
         </li>
         <li>
           <router-link to="/burndown">Burndown</router-link>
