@@ -12,7 +12,6 @@
         <li>Pressione Enter ou Espaço em um cartão para ativar o modo de movimento.</li>
         <li>Com o modo de movimento ativo, use as setas direcionais para mover o cartão entre ou dentro das colunas.</li>
         <li>Pressione Escape para desativar o modo de movimento.</li>
-        <li>Alternativamente, use o mouse para arrastar e soltar os cartões entre as colunas.</li>
       </ul>
     </div>
 
@@ -375,7 +374,6 @@ body {
   border: 2px dashed var(--focus-color);
 }
 .navigation-footer {
-  margin-top: 2rem;
   display: flex;
   justify-content: center;
   padding-bottom: 1rem;

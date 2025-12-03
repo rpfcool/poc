@@ -248,7 +248,6 @@ const actualWorkPath = computed(() => {
   outline: none;
 }
 
-
 .chart-legend {
   display: flex;
   justify-content: center;
@@ -288,7 +287,6 @@ const actualWorkPath = computed(() => {
   border: 0;
 }
 .navigation-footer {
-  margin-top: 2rem;
   display: flex;
   justify-content: center;
   padding-bottom: 1rem;

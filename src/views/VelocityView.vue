@@ -435,7 +435,6 @@ const a11yPoints = computed(() => {
   border: 0;
 }
 .navigation-footer {
-  margin-top: 2rem;
   display: flex;
   justify-content: center;
   padding-bottom: 1rem;
