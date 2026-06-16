@@ -116,6 +116,7 @@
           :key="`a11y-point-${point.id}`"
           type="button"
           class="a11y-point"
+          :aria-label="`${point.name}. ${point.todo} A Fazer. ${point.progress} Em Progresso. ${point.testing} Em Teste. ${point.done} Concluído.`"
           :style="{
             top: point.top + '%',
             left: point.left + '%',
@@ -123,13 +124,6 @@
             height: '100%'
           }"
         >
-          <span class="sr-only">
-            {{ point.name }}.
-            {{ point.todo }} A Fazer.
-            {{ point.progress }} Em Progresso.
-            {{ point.testing }} Em Teste.
-            {{ point.done }} Concluído.
-          </span>
         </button>
       </div>
 
@@ -309,7 +303,7 @@ const a11yPoints = computed(() => {
 
 .axis-labels {
   font-size: 16px;
-  fill: #718096;
+  fill: #4a5568;
 }
 
 .axis-title {

@@ -45,13 +45,13 @@
         <text class="axis-title" :x="(width + marginX - marginEnd) / 2" :y="height - 10" text-anchor="middle">Dias do Sprint</text>
         
         <polyline fill="none" stroke="#a0aec0" stroke-width="3" stroke-dasharray="6 3" :points="idealWorkPath" />
-        <polyline fill="none" stroke="#4299e1" stroke-width="4" :points="actualWorkPath" />
+        <polyline fill="none" stroke="#2b6cb0" stroke-width="4" :points="actualWorkPath" />
         <g 
           v-for="(point, index) in actualPoints"
           :key="`actual-point-${index}`"
           class="data-point"
         >
-          <circle :cx="point.x" :cy="point.y" r="6" fill="#4299e1" stroke="#fff" stroke-width="3" />
+          <circle :cx="point.x" :cy="point.y" r="6" fill="#2b6cb0" stroke="#fff" stroke-width="3" />
           <g class="tooltip">
             <rect class="tooltip-bg" :x="point.x - 45" :y="point.y - 55" width="90" height="35" rx="5" />
             <text class="tooltip-text" :x="point.x" :y="point.y - 35" text-anchor="middle">
@@ -67,12 +67,12 @@
           :key="`a11y-point-${index}`"
           type="button"
           class="a11y-point"
+          :aria-label="`Dia ${index}: ${point.value} tarefas restantes.`"
           :style="{
             top: point.top + '%',
             left: point.left + '%'
           }"
         >
-          <span class="sr-only">Dia {{ index }}: {{ point.value }} tarefas restantes.</span>
         </button>
       </div>
 
@@ -182,7 +182,7 @@ const actualWorkPath = computed(() => {
 
 .axis-labels {
   font-size: 16px;
-  fill: #718096;
+  fill: #4a5568;
 }
 
 .axis-title {
@@ -272,7 +272,7 @@ const actualWorkPath = computed(() => {
   border: 2px dashed #718096;
 }
 .legend-swatch.actual {
-  background-color: #4299e1;
+  background-color: #2b6cb0;
 }
 
 .sr-only {

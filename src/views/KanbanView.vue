@@ -53,6 +53,8 @@
             'is-dragging': draggedTaskId === task.id
           }"
           tabindex="0"
+          role="button"
+          :aria-pressed="selectedCard?.id === task.id ? 'true' : 'false'"
           :aria-label="`${task.title}. Prioridade: ${task.priority}`"
           :aria-describedby="`desc-${task.id}`"
           :aria-grabbed="selectedCard?.id === task.id"
@@ -303,7 +305,7 @@ body {
 }
 .task-count {
   font-weight: normal;
-  color: #6b778c;
+  color: #4a5568;
 }
 .column-content {
   display: flex;
@@ -343,7 +345,7 @@ body {
   margin: 0;
 }
 .card-description {
-  color: #5e6c84;
+  color: #4a5568;
   margin: 0.5rem 0 0 0;
   font-size: 0.9rem;
 }

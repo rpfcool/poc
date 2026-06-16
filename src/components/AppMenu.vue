@@ -1,5 +1,5 @@
 <template>
-  <header class="main-header" aria-hidden="true">
+  <header class="main-header">
     <nav class="main-navigation" aria-label="Navegação principal">
       <ul>
         <li>
@@ -28,7 +28,7 @@
   --nav-bg: #ffffff;
   --nav-text: #4a5568;
   --nav-text-hover: #1a202c;
-  --nav-active: #4299e1;
+  --nav-active: #2b6cb0;
   --nav-border: #e2e8f0;
 }
 

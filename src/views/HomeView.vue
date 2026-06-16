@@ -82,7 +82,7 @@
 }
 
 .feature-card p {
-  color: #718096;
+  color: #4a5568;
   margin-bottom: 1.5rem;
   line-height: 1.5;
 }
@@ -90,7 +90,7 @@
 .action-btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  background-color: #4299e1;
+  background-color: #2b6cb0;
   color: white;
   text-decoration: none;
   border-radius: 6px;
@@ -99,7 +99,7 @@
 }
 
 .action-btn:hover {
-  background-color: #3182ce;
+  background-color: #1a4f8a;
 }
 
 @media (max-width: 768px) {
