@@ -47,34 +47,36 @@
         <li
           v-for="(task, taskIndex) in column.tasks"
           :key="task.id"
-          class="kanban-card"
-          :class="{ 
-            'is-selected': selectedCard?.id === task.id,
-            'is-dragging': draggedTaskId === task.id
-          }"
-          tabindex="0"
-          role="button"
-          :aria-pressed="selectedCard?.id === task.id ? 'true' : 'false'"
-          :aria-label="`${task.title}. Prioridade: ${task.priority}`"
-          :aria-describedby="`desc-${task.id}`"
-          :aria-grabbed="selectedCard?.id === task.id"
-          :data-card-id="task.id"
-          draggable="true"
-          @keyup.space.prevent="toggleSelection(task)"
-          @keyup.enter.prevent="toggleSelection(task)"
-          @keydown="handleCardMovement($event, task, column.id, colIndex, taskIndex)"
-          @dragstart="onDragStart($event, task)"
-          @dragend="onDragEnd()"
         >
-          <h3 class="card-title">{{ task.title }}</h3>
-          <p :id="`desc-${task.id}`" class="card-description">{{ task.description }}</p>
-          <div class="card-priority" :aria-label="`Prioridade ${task.priority}`">
-            <span aria-hidden="true">
-              <template v-if="task.priority==='Alta'"><span title="Prioridade Alta">🔴</span></template>
-              <template v-else-if="task.priority==='Média'"><span title="Prioridade Média">🟡</span></template>
-              <template v-else><span title="Prioridade Baixa">🟢</span></template>
-            </span>
-            <span class="sr-only">Prioridade {{ task.priority }}</span>
+          <div
+            class="kanban-card"
+            :class="{ 
+              'is-selected': selectedCard?.id === task.id,
+              'is-dragging': draggedTaskId === task.id
+            }"
+            tabindex="0"
+            role="button"
+            :aria-pressed="selectedCard?.id === task.id ? 'true' : 'false'"
+            :aria-label="`${task.title}. Prioridade: ${task.priority}`"
+            :aria-describedby="`desc-${task.id}`"
+            :data-card-id="task.id"
+            draggable="true"
+            @keyup.space.prevent="toggleSelection(task)"
+            @keyup.enter.prevent="toggleSelection(task)"
+            @keydown="handleCardMovement($event, task, column.id, colIndex, taskIndex)"
+            @dragstart="onDragStart($event, task)"
+            @dragend="onDragEnd()"
+          >
+            <h3 class="card-title">{{ task.title }}</h3>
+            <p :id="`desc-${task.id}`" class="card-description">{{ task.description }}</p>
+            <div class="card-priority" :aria-label="`Prioridade ${task.priority}`">
+              <span aria-hidden="true">
+                <template v-if="task.priority==='Alta'"><span title="Prioridade Alta">🔴</span></template>
+                <template v-else-if="task.priority==='Média'"><span title="Prioridade Média">🟡</span></template>
+                <template v-else><span title="Prioridade Baixa">🟢</span></template>
+              </span>
+              <span class="sr-only">Prioridade {{ task.priority }}</span>
+            </div>
           </div>
         </li>
       </ul>
@@ -162,9 +164,15 @@ function moveTask(taskId, fromColumnId, toColumnId) {
   if (!fromColumn || !toColumn) return;
   const taskIndex = fromColumn.tasks.findIndex(t => t.id === taskId);
   if (taskIndex === -1) return;
+
   const [task] = fromColumn.tasks.splice(taskIndex, 1);
   toColumn.tasks.push(task);
-  announce(`Tarefa '${task.title}' movida para ${toColumn.title}.`);
+
+  // push() insere no fim: a posição do cartão é o próprio tamanho da coluna
+  const total = toColumn.tasks.length;
+  announce(
+    `Tarefa '${task.title}' movida para ${toColumn.title}, posição ${total} de ${total}.`
+  );
 }
 
 function moveTaskWithinColumn(taskId, columnId, currentIndex, direction) {
@@ -173,7 +181,9 @@ function moveTaskWithinColumn(taskId, columnId, currentIndex, direction) {
   const newIndex = currentIndex + direction;
   const [task] = column.tasks.splice(currentIndex, 1);
   column.tasks.splice(newIndex, 0, task);
-  announce(`'${task.title}' movido para a posição ${newIndex + 1}.`);
+  announce(
+    `'${task.title}' movido para a posição ${newIndex + 1} de ${column.tasks.length}.`
+  );
 }
 
 // Função que gerencia a movimentação (teclado)
@@ -213,19 +223,23 @@ async function handleCardMovement(event, task, columnId, colIndex, taskIndex) {
         moveAndFocus();
       }
       break;
-    case 'ArrowDown':
+    case 'ArrowDown': {
       event.preventDefault();
-      if (taskIndex < columns.length - 1) {
+      // O limite é o número de tarefas DA COLUNA ATUAL, não o de colunas do quadro.
+      const currentColumn = columns.find(c => c.id === columnId);
+      if (currentColumn && taskIndex < currentColumn.tasks.length - 1) {
         moveTaskWithinColumn(task.id, columnId, taskIndex, 1);
         moveAndFocus();
       }
       break;
-    case 'Escape':
+    }
+    case 'Escape': {
       event.preventDefault();
       const taskTitle = selectedCard.value.title;
       selectedCard.value = null;
       announce(`Seleção de '${taskTitle}' cancelada.`);
       break;
+    }
   }
 }
 
